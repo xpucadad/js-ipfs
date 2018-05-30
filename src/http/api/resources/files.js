@@ -153,7 +153,7 @@ exports.add = {
   validate: {
     query: Joi.object()
       .keys({
-        'cid-version': Joi.number().integer().min(0).max(1),
+        'cid-version': Joi.number().integer().min(0).max(1).default(0),
         // Temporary restriction on raw-leaves:
         // When cid-version=1 then raw-leaves MUST be present and false.
         //
