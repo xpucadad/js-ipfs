@@ -5,20 +5,25 @@ const Node = require('../runtime/libp2p-nodejs')
 const promisify = require('promisify-es6')
 const get = require('lodash/get')
 const defaultsDeep = require('@nodeutils/defaults-deep')
+const Protector = require('libp2p-pnet')
 
 module.exports = function libp2p (self) {
   return {
     start: promisify((callback) => {
-      self.config.get(gotConfig)
+      Promise.all([
+        self.config.get(),
+        self.repo.swarmKey()
+      ])
+        .then((results) => {
+          gotConfig.apply(null, results)
+        })
+        .catch(callback)
 
-      function gotConfig (err, config) {
-        if (err) {
-          return callback(err)
-        }
-
+      function gotConfig (config, swarmKey) {
         const libp2pDefaults = {
           peerInfo: self._peerInfo,
           peerBook: self._peerInfoBook,
+          modules: { },
           config: {
             peerDiscovery: {
               mdns: {
@@ -49,6 +54,12 @@ module.exports = function libp2p (self) {
               pubsub: get(self._options, 'EXPERIMENTAL.pubsub', false)
             }
           }
+        }
+
+        // Setup the private network protector if needed
+        if (swarmKey) {
+          self.log('Swarm created for private network')
+          libp2pDefaults.modules.connProtector = new Protector(swarmKey)
         }
 
         const libp2pOptions = defaultsDeep(

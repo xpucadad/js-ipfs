@@ -66,6 +66,22 @@ module.exports = function repo (self) {
       })
     }),
 
+    /**
+     * Gets the swarm key from the repo if it exists
+     *
+     * @param {function(Error, Number)} [callback]
+     * @returns {undefined}
+     */
+    swarmKey: promisify((callback) => {
+      self._repo.swarmKey((err, swarmKeyBuffer) => {
+        if (err) {
+          // we can treat errors as null keys
+          return callback(null, null)
+        }
+        callback(null, swarmKeyBuffer)
+      })
+    }),
+
     path: () => self._repo.path
   }
 }
