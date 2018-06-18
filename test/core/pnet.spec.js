@@ -9,7 +9,6 @@ const parallel = require('async/parallel')
 const IpfsFactory = require('ipfsd-ctl')
 const isNode = require('detect-node')
 const path = require('path')
-const rimraf = require('rimraf')
 const IPFS = require('../../')
 const writeKey = require('libp2p-pnet').generate
 const once = require('once')
@@ -47,6 +46,8 @@ describe('private network', function () {
   if (!isNode) {
     return
   }
+
+  const rimraf = require('rimraf')
 
   const networkAKey = Buffer.alloc(95)
   const networkBKey = Buffer.alloc(95)
