@@ -112,7 +112,7 @@
     "ipfs-multipart": "~0.1.0",
     "ipfs-repo": "~0.22.1",
     "ipfs-unixfs": "~0.1.15",
-    "ipfs-unixfs-engine": "~0.30.0",
+    "ipfs-unixfs-engine": "~0.30.2",
     "ipld": "~0.17.3",
     "ipld-dag-cbor": "~0.12.1",
     "ipld-dag-pb": "~0.14.6",
