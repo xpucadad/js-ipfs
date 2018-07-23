@@ -5,7 +5,7 @@ const tests = require('interface-ipfs-core')
 const CommonFactory = require('../utils/interface-common-factory')
 const isNode = require('detect-node')
 
-describe.only('interface-ipfs-core tests', () => {
+describe('interface-ipfs-core tests', () => {
   const defaultCommonFactory = CommonFactory.create()
 
   tests.bitswap(defaultCommonFactory, { skip: !isNode })
@@ -91,7 +91,6 @@ describe.only('interface-ipfs-core tests', () => {
     // No need to stop, because the test suite does a 'stop' test.
     createTeardown: () => cb => cb()
   }))
-
   /* TODO uncomment once interface-ipfs-core PR get merged
   tests.name(CommonFactory.create({
     spawnOptions: {
@@ -99,7 +98,6 @@ describe.only('interface-ipfs-core tests', () => {
       initOptions: { bits: 512 }
     }
   })) */
-
   tests.object(defaultCommonFactory)
 
   tests.pin(defaultCommonFactory)
