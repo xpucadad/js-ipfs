@@ -240,9 +240,9 @@ Creates and returns an instance of an IPFS node. Use the `options` argument to s
 
 - `libp2p` (object or function(ipfs, config)) add custom modules to the libp2p stack of your node
 
-    The libp2p option allows you to build your libp2p node by configuration, or via a generator. If you are looking to just modify the below options, using the object format is the quickest way to get the default features of libp2p. If you need to create a more customized libp2p node, such as with custom transports or peer/content routers that need some of the ipfs data on startup, a generator is a great way to achieve this.
+    The libp2p option allows you to build your libp2p node by configuration, or via a factory. If you are looking to just modify the below options, using the object format is the quickest way to get the default features of libp2p. If you need to create a more customized libp2p node, such as with custom transports or peer/content routers that need some of the ipfs data on startup, a factory is a great way to achieve this.
 
-    You can see the generator in action in the [custom libp2p example](examples/custom-libp2p).
+    You can see the factory in action in the [custom libp2p example](examples/custom-libp2p).
 
     - `modules` (object):
         - `transport` (Array<[libp2p.Transport](https://github.com/libp2p/interface-transport)>): An array of Libp2p transport classes/instances to use _instead_ of the defaults. See [libp2p/interface-transport](https://github.com/libp2p/interface-transport) for details.
